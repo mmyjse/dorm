@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>物流管理系统</title>
+<link href="/${resourceRoot}/js/libs/ext/resources/css/ext-all-neptune.css" rel="stylesheet" />
+<script type="text/javascript" src="/${resourceRoot}/js/libs/jquery/1.9/jquery.min.js"></script>
+<script src="/${resourceRoot}/js/libs/ext/ext-all.js" type="text/javascript"></script>
+<script src="/${resourceRoot}/js/libs/ext/locale/ext-lang-zh_CN.js" type="text/javascript"></script>
+<script type="text/javascript" src="/${resourceRoot}/js/view/index/app.js"></script>
+<script type="text/javascript" src="/${resourceRoot}/js/common/sysComponent.js"></script>
+<script type="text/javascript" src="/${resourceRoot}/js/common/sysMsg.js"></script>
+<script type="text/javascript" src="/${resourceRoot}/js/common/formValidate.js"></script>
+<link href="/${resourceRoot}/css/index.css" rel="stylesheet" />
+<style type="text/css">
+.no-icon {
+	margin: 5px;
+	background-image:
+		url('/${resourceRoot}/js/libs/ext/resources/themes/images/default/tree/s.gif')
+		!important;
+}
+</style>
+<script>
+	function getEleWeight() {
+		var weight = WeightControl.CallGetWeight();
+		weight = Math.round(weight*100)/100;
+		return weight;
+	}
+</script>
+</head>
+<body>
+	<input type="hidden" id="resourceRoot" value="${resourceRoot}" />
+	<OBJECT id="WeightControl" width="0" height="0" CLASSID="CLSID:5A75C2AE-7491-4A01-810D-3BCF137F8D5B">
+	</OBJECT>
+</body>
+</html>

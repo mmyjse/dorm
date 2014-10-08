@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.diqitian.ed.dal.AttachmentDao">
+	<sql id="columns">
+        t.id				as 	id,      
+        t.uuid				as 	uuid,
+		t.src_name			as	srcName,
+		t.desc_name			as	descName,
+		t.path				as	path,
+		t.size				as	size,
+		t.ext				as	ext,
+		t.user_id			as	userId,
+		t.file_type			as	fileType,
+		t.gmt_create		as	gmtCreate
+	</sql>
+	
+	<resultMap type="Attachment" id="resultMap">
+		<result property="id" column="id" />
+		<result property="uuid" column="uuid" />
+		<result property="srcName" column="srcName" />
+		<result property="descName" column="descName" />
+		<result property="path" column="path" />
+		<result property="size" column="size" />
+		<result property="ext" column="ext" />
+		<result property="userId" column="userId" />
+		<result property="fileType" column="fileType" />
+		<result property="gmtCreate" column="gmtCreate" />
+	</resultMap>
+	<insert id="create" parameterType="Attachment" useGeneratedKeys="true" keyProperty="id">
+		insert into attachment(
+			user_id,
+			uuid,
+			file_type,
+			src_name,
+			desc_name,
+			ext,
+			path,
+			size,
+			gmt_create
+		) values(
+			#{userId},
+			#{uuid},
+			#{fileType},
+			#{srcName},
+			#{descName},
+			#{ext},
+			#{path},
+			#{size},
+			now()
+		)
+	</insert>
+	
+	<delete id="delete" parameterType="long">
+		delete from attachment
+		 where id = #{id}
+	</delete>
+	
+	<select id="get" resultMap="resultMap" parameterType="long">
+		select 
+			<include refid="columns"/>
+		 from attachment t
+		 where t.id=#{id}
+	</select>
+	
+	<select id="getByUuid" resultMap="resultMap" parameterType="long">
+		select 
+			<include refid="columns"/>
+		 from attachment t
+		 where t.uuid=#{uuid}
+	</select>
+	
+	<select id="findByIds" resultMap="resultMap">
+		select 
+			<include refid="columns"/>
+		 from attachment t
+		 where t.id in
+		 <foreach item="item" index="index" collection="array"
+			open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+</mapper>

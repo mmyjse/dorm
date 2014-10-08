@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.diqitian.ed.dal.FunctionsDao">
+	<sql id="columns">
+		f.id,f.parent_id,f.text,f.is_leaf,f.url,
+		f.remark,f.order_num,f.enable,
+		f.create_date,f.update_date
+	</sql>
+	
+	<resultMap type="Functions" id="resultMap">
+		<id property="id" column="id"/>          
+        <result property="parentId" column="parent_id"/> 
+        <result property="text" column="text"/>   
+        <result property="remark" column="remark"/> 
+        <result property="isLeaf" column="is_leaf"/>
+        <result property="url" column="url"/>
+        <result property="orderNum"  column="order_num"/>
+        <result property="enable" column="enable"/>
+        <result property="createDate" column="create_date"/>
+        <result property="updateDate" column="update_date"/>
+	</resultMap>  
+	
+	<select id="get" resultMap="resultMap" parameterType="long">
+		SELECT <include refid="columns"/>
+		FROM functions f
+		WHERE f.id = #{id}
+   	</select>
+   
+   	<select id="getFunctionsByUserId" parameterType="map" resultMap="resultMap">
+		select distinct <include refid="columns"/>
+		from user_role ur, role_functions rf, functions f
+		where ur.role_id = rf.role_id
+			and rf.functions_id = f.id
+			and f.enable = 1
+			and ur.user_id = #{userId} 
+			<if test="parentId != null">
+				and f.parent_id = #{parentId}
+			</if>
+		order by order_num asc
+	</select>
+	
+</mapper>

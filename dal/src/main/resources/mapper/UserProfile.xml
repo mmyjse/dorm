@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.diqitian.ed.dal.UserProfileDao">
+
+	<insert id="create" parameterType="UserProfile" useGeneratedKeys="true" keyProperty="id">
+		insert into user_profile(
+				user_id,network_id,work_number,name,mobile,telephone,
+				address,qq,wangwang,wechat,fetion,urgent_name,
+				urgent_mobile,urgent_telephone,urgent_address,
+				sex,birthday,idcard,idcard_address,card_number,
+				create_date,update_date
+			) values (
+				#{User.id},#{network.id},#{work_number},#{name},#{mobile},#{telephone},
+				#{address},#{qq},#{wangwang},#{wechat},#{fetion},#{urgentName},
+				#{urgentMobile},#{urgentTelephone},#{urgentAddress},
+				#{sex},#{birthday},#{idcard},#{idcardAddress},#{cardNumber},
+				now(),now()
+			)
+	</insert>
+	
+	<update id="update" parameterType="UserProfile">
+		update user_profile 
+		<set>
+			<if test="network != null and network.id != null">network_id = #{network.id},</if>
+			<if test="workNumber != null">work_number = #{workNumber},</if>
+			<if test="name != null">name = #{name},</if>
+			<if test="mobile != null">mobile = #{mobile},</if>
+			<if test="telephone != null">telephone = #{telephone}</if>
+			<if test="address != null">address = #{address}</if>
+			<if test="qq != null">qq = #{qq}</if>
+			<if test="wangwang != null">wangwang = #{wangwang}</if>
+			<if test="wechat != null">wechat = #{wechat}</if>
+			<if test="fetion != null">fetion = #{fetion}</if>
+			<if test="urgentName != null">urgent_name = #{urgentName}</if>
+			<if test="urgentMobile != null">urgent_mobile = #{urgentMobile}</if>
+			<if test="urgentTelephone != null">urgent_telephone = #{urgentTelephone}</if>
+			<if test="urgentAddress != null">urgent_address = #{urgentAddress}</if>
+			<if test="sex != null">sex = #{sex}</if>
+			<if test="birthday != null">birthday = #{birthday}</if>
+			<if test="idcard != null">idcard = #{idcard}</if>
+			<if test="idcardAddress != null">idcard_address = #{idcardAddress}</if>
+			<if test="cardNumber != null">card_number = #{cardNumber}</if>
+			update_date = now()
+		</set>
+		where id=#{id}
+	</update>
+	
+	<delete id="delete" parameterType="long">
+		delete from user_profile WHERE id=#{id}
+	</delete>
+	
+	<sql id="columns">
+		up.id,up.user_id,up.network_id,up.work_number,up.name,up.mobile,up.telephone,
+		up.address,up.qq,up.wangwang,up.wechat,up.fetion,up.urgent_name,
+		up.urgent_mobile,up.urgent_telephone,up.urgent_address,
+		up.sex,up.birthday,up.idcard,up.idcard_address,up.card_number,
+		up.create_date,up.update_date
+	</sql>
+	<resultMap type="UserProfile" id="resultMap">
+		<id property="id" column="id"/>          
+		<result property="workNumber" column="work_number"/>
+		<result property="name" column="name"/>
+		<result property="mobile" column="mobile"/>
+		<result property="telephone" column="telephone"/>
+		<result property="address" column="address"/>
+		<result property="qq" column="qq"/>
+		<result property="wangwang" column="wangwang"/>
+		<result property="wechat" column="wechat"/>
+		<result property="fetion" column="fetion"/>
+		<result property="urgentName" column="urgent_name"/>
+		<result property="urgentMobile" column="urgent_mobile"/>
+		<result property="urgentTelephone" column="urgent_telephone"/>
+		<result property="urgentAddress" column="urgent_address"/>
+		<result property="sex" column="sex"/>
+		<result property="birthday" column="birthday"/>
+		<result property="idcard" column="idcard"/>
+		<result property="idcardAddress" column="idcard_address"/>
+		<result property="cardNumber" column="card_number"/>
+		<result property="createDate" column="create_date"/>
+		<result property="updateDate" column="update_date"/>
+		<association property="network" javaType="Network" >  
+			<id property="id" column="network_id" />
+		</association>
+		<association property="user" javaType="User" >  
+			<id property="id" column="user_id" />
+		</association>
+	</resultMap>
+	
+	<select id="get" resultMap="resultMap" parameterType="long">
+		SELECT <include refid="columns" />
+		FROM user_profile up WHERE up.id = #{id}
+	</select>
+	
+	<select id="getUserProfileByUserId" resultMap="resultMap" parameterType="long">
+		SELECT <include refid="columns" />
+		FROM user_profile up WHERE up.user_id = #{userId}
+	</select>
+	
+	<select id="getUserProfileByWorkNumber" resultMap="resultMap" parameterType="long">
+		SELECT <include refid="columns" />
+		FROM user_profile up WHERE up.work_number = #{workNumber}
+	</select>
+	
+	<select id="getUserProfileForList" resultMap="resultMap" >
+		SELECT <include refid="columns" />
+		FROM user_profile up 
+	</select>
+</mapper>

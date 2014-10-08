@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toolbox>
+	<tool>
+		<key>dateUtil</key>
+		<scope>application</scope>
+		<class>com.diqitian.ed.common.util.DateUtils</class>
+	</tool>
+<!-- 	<tool> -->
+<!-- 		<key>stringUtil</key> -->
+<!-- 		<scope>application</scope> -->
+<!-- 		<class>net.jwsz.bew.common.util.StringUtils</class> -->
+<!-- 	</tool> -->
+</toolbox>

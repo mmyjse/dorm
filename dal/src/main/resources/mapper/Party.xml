@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.diqitian.ed.dal.PartyDao">
+
+	<insert id="create" parameterType="Party" useGeneratedKeys="true" keyProperty="id">
+		insert into party(
+				party_num,password,party_level,party_name,mobile,telephone,
+				qq,wangwang,wechat,fetion,enable,create_date
+			) values (
+				#{partyNum},#{password},#{partyLevel},#{partyName},#{mobile},#{telephone},
+				#{qq},#{wangwang},#{wechat},#{fetion},#{enable},now()
+			)
+	</insert>
+	
+	<update id="update" parameterType="Party">
+		update party 
+		<set>
+			<if test="partyNum != null">party_num = #{partyNum},</if>
+			<if test="password != null">password = #{password},</if>
+			<if test="partyLevel != null">party_level = #{partyLevel},</if>
+			<if test="partyName != null">party_name = #{partyName},</if>
+			<if test="mobile != null">mobile = #{mobile},</if>
+			<if test="telephone != null">telephone = #{telephone},</if>
+			<if test="qq != null">qq = #{qq},</if>
+			<if test="wangwang != null">wangwang = #{wangwang},</if>
+			<if test="wechat != null">wechat = #{wechat},</if>
+			<if test="fetion != null">fetion = #{fetion},</if>
+			<if test="enable != null">enable = #{enable}</if>
+		</set>
+		where id=#{id}
+	</update>
+	
+	<delete id="delete" parameterType="long">
+		delete from party WHERE id=#{id}
+	</delete>
+	
+	<sql id="columns">
+		p.id,p.party_num,p.password,p.party_level,p.party_name,p.mobile,p.telephone,
+		p.qq,p.wangwang,p.wechat,p.fetion,p.enable,p.create_date
+	</sql>
+	<resultMap type="Party" id="resultMap">
+	 	<id property="id" column="id"/>          
+	 	<result property="partyNum" column="party_num"/>
+        <result property="password" column="password"/>
+        <result property="partyLevel" column="party_level"/>
+        <result property="partyName" column="party_name"/>
+        <result property="mobile" column="mobile"/>
+        <result property="telephone" column="telephone"/>
+        <result property="qq" column="qq"/>
+        <result property="wangwang" column="wangwang"/>
+        <result property="wechat" column="wechat"/>
+        <result property="fetion" column="fetion"/>
+        <result property="enable" column="enable"/>
+        <result property="createDate" column="create_date"/>
+	</resultMap>
+	
+	<select id="get" resultMap="resultMap" parameterType="long">
+		SELECT <include refid="columns" />
+		FROM party p WHERE p.id = #{id}
+	</select>
+	
+	<select id="getPartyByPartyNum" resultMap="resultMap" parameterType="string">
+		SELECT <include refid="columns" />
+		FROM party p WHERE p.party_num = #{partyNum}
+	</select>
+	
+	<select id="findByCondition" parameterType="map" resultMap="resultMap">
+	   select <include refid="columns" />
+		from party p 
+		where
+			p.enable <![CDATA[ <> ]]> '1'
+<!-- 			<if test="param!=null and param.companyName!=null">and c.company_name like CONCAT('%',#{param.companyName},'%')</if> -->
+<!-- 			<if test="param!=null and param.buildingId!=null">and b.id = #{param.buildingId}</if> -->
+<!-- 			<if test="param!=null and param.actionType!=null">and c.action = #{param.actionType} </if> -->
+		    order by c.gmt_modify desc
+		    limit #{pageIndex}, #{pageSize}
+	</select>
+	<select id="countByCondition" parameterType="map" resultType="int">
+		select count(*) from party p
+		where
+			p.enable <![CDATA[ <> ]]> '1'
+	</select>
+</mapper>

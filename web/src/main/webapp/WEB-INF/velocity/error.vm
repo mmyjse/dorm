@@ -1,0 +1,21 @@
+#parse('/subHead.vm')
+<div class="main newmain">
+	<div class="main_main"> 
+		<div class="main_right">
+        	<div class="right_naver">
+				<p>您现在的位置：<span>后台管理</span> > <span class="yellow">系统出错</span></p>
+			</div>
+            <div class="notice_add">
+            	<div class="form_success successall">
+					<span class="cgimg ccimg"></span>
+					<span>抱歉，出错了！</span>
+					<p>
+						<span>页面超时或者目标页面暂时无法访问</span>
+
+					</p>
+				</div>
+            </div>
+		</div>
+	</div>
+</div>
+#parse('/subFooter.vm')

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.diqitian.ed.dal.WaybillOperateLogDao">
+
+	<insert id="create" parameterType="WaybillOperateLog" useGeneratedKeys="true" keyProperty="id">
+		insert into waybill_operate_log(
+				waybill_id,operate_user_id,operate_type,operate_date
+			) values (
+				#{waybillId},#{operateUserId},#{operateType},now()
+			)
+	</insert>
+	
+	<delete id="delete" parameterType="long">
+		delete from waybill_operate_log WHERE id=#{id}
+	</delete>
+	
+	<sql id="columns">
+		wol.id,wol.waybill_id,wol.operate_user_id,wol.operate_type,wol.operate_date
+	</sql>
+	<resultMap type="WaybillLog" id="resultMap">
+		<id property="id" column="id"/>          
+		<result property="waybillId" column="waybill_id"/>
+		<result property="operateUserId" column="operate_user_id"/>
+		<result property="operateType" column="operate_type"/>
+		<result property="operateDate" column="operate_date"/>
+	</resultMap>
+	
+	<select id="get" resultMap="resultMap" parameterType="long">
+		SELECT <include refid="columns" />
+		FROM waybill_operate_log wol WHERE wol.id = #{id}
+	</select>
+	
+<!-- 	<select id="findByCondition" parameterType="map" resultMap="resultMap"> -->
+<!-- 		select <include refid="columns" /> -->
+<!-- 		from waybill_log wl -->
+<!-- 		where  -->
+<!-- 			wl.bill_number = #{billNumber} -->
+<!-- 		    order by wl.trace_date desc -->
+<!-- 	</select> -->
+	
+	<select id="getWaybillOperateLogsByWaybillId" parameterType="long" resultMap="resultMap">
+		select <include refid="columns" />
+		from waybill_operate_log wol
+		where 
+			wl.waybill_id = #{waybillId}
+		    order by wol.operate_date desc
+	</select>
+</mapper>

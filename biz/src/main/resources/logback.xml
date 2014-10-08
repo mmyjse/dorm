@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false" scan="false">
+	<property resource="web.properties" />
+	<!-- 仅在开发时使用 -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern><![CDATA[
+				%n%-4r [%d{yyyy-MM-dd HH:mm:ss}] - %X{method} %X{requestURIWithQueryString} [ip=%X{remoteAddr}, ref=%X{referrer}, ua=%X{userAgent}, sid=%X{cookie.JSESSIONID}]%n  %-5level %logger{35}[%F:%L] - %m%n
+            ]]></pattern>
+		</encoder>
+	</appender>
+
+	<!-- 应用本身之外的日志输出到文件中（如spring等） -->
+	<appender name="ROOT-FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${ed.web.log.home.dir}/root.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${ed.web.log.home.dir}/logs_saved/root.%d{yyyy-MM-dd}.log</fileNamePattern>
+		</rollingPolicy>
+		<encoder>
+			<pattern><![CDATA[
+				%n%-4r [%d{yyyy-MM-dd HH:mm:ss}] - %X{method} %X{requestURIWithQueryString} [ip=%X{remoteAddr}, ref=%X{referrer}, ua=%X{userAgent}, sid=%X{cookie.JSESSIONID}]%n  %-5level %logger{35}[%F:%L] - %m%n
+            ]]></pattern>
+		</encoder>
+	</appender>
+
+	<!-- 应用本身的日志输出到文件中 -->
+	<appender name="APP-FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${ed.web.log.home.dir}/ed-web.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${ed.web.log.home.dir}/logs_saved/ed-web.%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+		</rollingPolicy>
+		<encoder>
+			<pattern><![CDATA[
+				%n%-4r [%d{yyyy-MM-dd HH:mm:ss}] - %X{method} %X{requestURIWithQueryString} [ip=%X{remoteAddr}, ref=%X{referrer}, ua=%X{userAgent}, sid=%X{cookie.JSESSIONID}]%n  %-5level %logger{35}[%F:%L] - %m%n
+            ]]></pattern>
+		</encoder>
+	</appender>
+
+	<if condition='"DEV".equals("${ed.production}")'>
+		<then>
+			<logger name="com.diqitian.ed" level="ERROR" additivity="false">
+				<appender-ref ref="APP-FILE" />
+				<appender-ref ref="STDOUT" />
+			</logger>
+			<root level="ERROR">
+				<appender-ref ref="APP-FILE" />
+				<appender-ref ref="STDOUT" />
+			</root>
+		</then>
+		<else>
+			<root level="ERROR">
+				<appender-ref ref="ROOT-FILE" />
+				<appender-ref ref="STDOUT" />
+			</root>
+		</else>
+	</if>
+
+</configuration>

@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>物流管理平台登录</title>
+<link href="/${resourceRoot}/css/style_back.css" rel="stylesheet" type="text/css"></link>
+<link href="/${resourceRoot}/css/common/common_back.css" rel="stylesheet" type="text/css"></link>
+<script type="text/javascript" src="/${resourceRoot}/js/libs/jquery/1.9/jquery.min.js" ></script>
+<script type="text/javascript" src="/${resourceRoot}/js/view/login.js"></script>
+</head>
+<body>
+<div class="main main1 blue_main" id="loginmain">
+	<div class="blue_upimg"></div>
+    <div class="main_dl"><div class="main_dlform">
+            <form action="/login" method="post">
+				<input id="iscode" value="$!{iscode}" type="hidden"/>
+                <dl><dt>用户名：</dt><dd><input name="loginId" type="text"  /></dd></dl>
+                <dl><dt>密&nbsp;&nbsp;&nbsp;码：</dt><dd><input name="password" type="password" /></dd></dl>
+				#*<dl class="yzm_login">
+					<dt>验&nbsp;证&nbsp;码：</dt>
+					<dd>
+						<input name="validCode" id="validCode"  title="点击验证码切换图片" type="text">
+						<div class="yzm" title="点击验证码切换图片"><img id="imgcode" src="/getCodeImg"/></div>
+					</dd>
+				</dl>*#
+				#if($iscode==false)<div class="yellow main_dlerror" id="warn_code">验证码输入错误</div> #end
+                #if($hasError) <div class="yellow main_dlerror">用户名或密码错误</div>#end
+                <dl><dt>&nbsp;</dt><dd><input name="" type="submit" class="but_login" value=""></dd></dl>
+         	 </form>
+    	</div>
+		<div class="blue_logincopy">版权所有</div>
+	</div><!--登录-->
+</div><!--全屏-->
+
+</body>
+</html>

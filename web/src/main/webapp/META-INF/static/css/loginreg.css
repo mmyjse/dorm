@@ -1,0 +1,514 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    margin: 0;
+    outline: 0 none;
+    padding: 0;
+    vertical-align: baseline;
+}
+.iserror {
+    background: url("../images/error_bg.png") no-repeat scroll 0 0 transparent;
+    height: 133px;
+    left: 304px;
+    position: absolute;
+    top: 0;
+    width: 248px;
+}
+.iserror .war {
+    margin-left: 25px;
+    margin-top: 10px;
+    text-align:left;
+}
+.iserror .war img {
+    text-align: center;
+    vertical-align: middle;
+}
+.iserror .war span {
+    color: #FF69A3;
+    font-weight: bold;
+    margin-left: 6px;
+}
+.iserror .content {
+    height: 190px;
+    margin-left: 25px;
+    margin-top: 14px;
+    
+}
+.iserror .content pre {
+    color: #666666;
+    white-space: pre-wrap;
+    width: 99%;
+    word-wrap: break-word;
+    font: 12px/1.6 tahoma,arial,sans-serif;
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    margin: 0;
+    outline: 0 none;
+    padding: 0;
+    vertical-align: baseline;
+    line-height:10px;
+}
+.r3 {
+    border-radius: 3px 3px 3px 3px;
+}
+.reg_wrap {
+    height: 540px;
+}
+.reg_wrap .content {
+    height: 534px;
+}
+.login_wrap input, .reg_wrap input {
+    background: none repeat scroll 0 0 transparent;
+}
+.fm960 {
+    margin: 0 auto;
+    width: 960px;
+}
+.reg_hd {
+    padding: 27px 0 33px;
+}
+.logo {
+    background: url("../images/logo.jpg") no-repeat scroll 0 0 transparent;
+    height: 106px;
+}
+.logo .jiaruhe {
+    height: 90px;
+    margin-right: 10px;
+    overflow: hidden;
+    text-indent: -999em;
+    width: 160px;
+}
+#register_box {
+    padding-left: 55px;
+}
+#register_left {
+    float: left;
+    height: 574px;
+    width: 645px;
+}
+#register_left h1 {
+    color: #768263;
+    font-family: '微软雅黑';
+    font-size: 26px;
+    font-weight: normal;
+    margin-top: 30px;
+    
+    
+    text-align: left;
+    outline: 0 none;
+    padding: 0;
+    vertical-align: baseline;
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    text-rendering: optimizelegibility;
+    line-height: 36px;
+}
+#register_center {
+    width: 644px;
+}
+#register_form {
+    float: left;
+    width: 360px;
+}
+.ipt_partyNum {
+    line-height: 30px;
+    margin-left: 20px;
+    margin-top: 32px;
+    overflow: hidden;
+}
+#register_form span {
+    color: #333333;
+    float: left;
+    font-size: 14px;
+    text-align: center;
+    vertical-align: middle;
+}
+#register_form .text {
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    margin-left: 5px;
+    width: 254px;
+    margin:0;
+    padding:0;
+}
+#register_form .check {
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    margin-left: 5px;
+    width: 114px;
+}
+.ipt_ulike {
+    line-height: 30px;
+    margin-left: 48px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+.ipt_sex {
+    height: 30px;
+    line-height: 30px;
+    margin-left: 48px;
+    margin-top: 20px;
+    overflow: hidden;
+    text-align:left;
+}
+.ipt_sex .rdo {
+    float:left;
+}
+.ipt_sex .rdo .ck {
+    margin-top: -3px;
+    text-align: center;
+    vertical-align: middle;
+}
+.ipt_password {
+    line-height: 30px;
+    margin-left: 48px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+.ipt_respassword {
+    line-height: 30px;
+    margin-left: 20px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+.ipt_question {
+    line-height: 30px;
+    margin-left: 48px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+.ipt_answer {
+    line-height: 30px;
+    margin-left: 48px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+.ipt_check {
+    line-height: 30px;
+    margin-left: 34px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+.ipt_box {
+    margin-left: 91px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+.ipt_sub {
+    margin-left: 92px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+#register_error {
+    float: left;
+    width: 280px;
+}
+.err_partyNum {
+    color: #999999;
+    font-size: 12px;
+    height: 36px;
+    line-height: 114%;
+    margin-top: 30px;
+    visibility: hidden;
+    text-align:left;
+}
+.err_ulike {
+    color: #999999;
+    font-size: 12px;
+    height: 36px;
+    line-height: 114%;
+    margin-top: 15px;
+    visibility: hidden;
+    text-align:left;
+}
+.err_password {
+    color: #999999;
+    font-size: 12px;
+    height: 26px;
+    line-height: 114%;
+    margin-top: 15px;
+    padding-top: 10px;
+    visibility: hidden;
+    text-align:left;
+}
+.err_rstpassword {
+    color: #999999;
+    font-size: 12px;
+    height: 26px;
+    line-height: 114%;
+    margin-top: 15px;
+    padding-top: 10px;
+    visibility: hidden;
+    text-align:left;
+    text-align:left;
+}
+.err_check {
+    color: #999999;
+    font-size: 12px;
+    height: 26px;
+    line-height: 114%;
+    margin-top: 14px;
+    padding-top: 16px;
+    visibility: hidden;
+    text-align:left;
+}
+
+.lg_login .sub, .lg_right .reg, .ipt_sub .sub, .rst_login a {
+    background: url("../images/login_reg_icon.png") no-repeat scroll 0 0 transparent;
+}
+a {
+    outline: medium none;
+    text-decoration: none;
+}
+#register_right {
+    border-left: 1px solid #E5E5E5;
+    float: left;
+    height: 480px;
+    margin-top: 40px;
+    width: 250px;
+}
+.ipt_sub .sub {
+    background-position: right -100px;
+    border: 0 none;
+    cursor: pointer;
+    display: block;
+    height: 35px;
+    width: 131px;
+}
+.rst_login {
+    margin-left: 32px;
+    margin-top: 38px;
+    text-align: left;
+}
+.rst_login span {
+    color: #999999;
+}
+.rst_login a {
+    background-position: right -150px;
+    display: block;
+    height: 29px;
+    margin-top: 12px;
+    width: 81px;
+}
+.fl {
+    display: inline;
+    float: left;
+}
+.ipt_box .box {
+    margin-right: 2px;
+    margin-top:0px;
+}
+.other_login {
+    margin-left: 32px;
+    margin-top: 65px;
+    text-align:left;
+}
+.other_login span {
+    color: #999999;
+    margin-bottom: 2px;
+    text-align:left;
+}
+.o_icon {
+    display: block;
+    height: 16px;
+    line-height: 16px;
+    margin-top: 12px;
+    padding-left: 20px;
+    padding-top: 2px;
+    width: 100px;
+}
+#register_form .ipt_box span {
+    color: #999999;
+    display: inline;
+    font-size: 12px;
+    line-height: 12px;
+    margin-top: 0;
+}
+#register_form .ipt_box a {
+	color: #999999
+}
+.copyright {
+    color: #999999;
+    margin: 40px 0 0;
+    text-align: center;
+}
+
+
+.login_wrap {
+    height: 450px;
+}
+.login_wrap .content {
+    height: 454px;
+}
+.lg_left {
+    float: left;
+    height: 442px;
+    width: 720px;
+}
+.lg_left h1 {
+    color: #768263;
+    font-family: '微软雅黑';
+    font-size: 26px;
+    font-weight: normal;
+    margin-left: 80px;
+    margin-top: 26px;
+    text-align:left
+}
+.lg_form {
+    margin-left: 100px;
+    margin-top: 32px;
+    position: relative;
+    width: 620px;
+}
+.lg_partyNum {
+    float: left;
+}
+.lg_partyNum span {
+    color: #333333;
+    float: left;
+    font-size: 14px;
+    line-height: 29px;
+    margin-top: 2px;
+}
+
+
+.lg_partyNum .text {
+    border: 1px solid #CFCFCF;
+    color: #999999;
+    height: 30px;
+    line-height: 30px;
+    margin-left: 8px;
+    padding-left: 8px;
+    width: 226px;
+}
+.err_partyNum {
+    float: left;
+    margin-left: 12px;
+    margin-top: 9px;
+    visibility: hidden;
+}
+.err_partyNum span {
+    background: url("../images/error1.png") no-repeat scroll left center transparent;
+    color: #FF89A7;
+    display: block;
+    margin-left: 4px;
+    padding-left: 21px;
+}
+.clear {
+    clear: both;
+    display: block;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    width: 0;
+}
+.lg_pass {
+    float: left;
+    margin-left: 14px;
+    margin-top: 20px;
+}
+.lg_pass span {
+    color: #333333;
+    float: left;
+    font-size: 14px;
+    line-height: 29px;
+    margin-top: 2px;
+}
+.lg_pass .text {
+    border: 1px solid #CFCFCF;
+    height: 30px;
+    line-height: 30px;
+    margin-left: 8px;
+    padding-left: 8px;
+    width: 226px;
+}
+.err_pass {
+    float: left;
+    margin-left: 12px;
+    margin-top: 28px;
+    visibility: hidden;
+}
+.err_pass span {
+    background: url("../images/error1.png") no-repeat scroll left center transparent;
+    color: #FF89A7;
+    margin-left: 4px;
+    padding-left: 21px;
+}
+.lg_remember {
+    margin-left: 60px;
+    margin-top: 20px;
+    text-align:left;
+}
+.lg_remember .check {
+    margin-right: 2px;
+    text-align: center;
+    vertical-align: middle;
+}
+.lg_remember span {
+    color: #999999;
+    cursor: pointer;
+}
+.lg_login {
+    margin-left: 60px;
+    margin-top: 15px;
+    text-align:left;
+}
+.lg_login .sub {
+    background-position: right 0;
+    border: 0 none;
+    cursor: pointer;
+    height: 29px;
+    width: 84px;
+}
+.lg_login a {
+    color: #666666;
+    margin-left: 12px;
+    text-decoration: underline;
+}
+.ot_login {
+    margin-left: 60px;
+    margin-top: 40px;
+    text-align:left;
+}
+.ot_login span {
+    color: #999999;
+}
+.ot_btn {
+    margin-top: 15px;
+}
+.ot_btn a {
+    float: left;
+    margin-left: 3px;
+}
+
+.lg_right {
+    border-left: 1px solid #E5E5E5;
+    float: left;
+    height: 370px;
+    margin-top: 30px;
+    width: 230px;
+    text-align:left;
+}
+.lg_right h2 {
+    color: #768263;
+    font-family: '微软雅黑';
+    font-size: 22px;
+    font-weight: normal;
+    margin-bottom: 36px;
+    margin-left: 40px;
+}
+.lg_right span, .lg_right p {
+    color: #333333;
+    font-size: 14px;
+    margin-top: 36px;
+}
+.lg_right .reg {
+    background-position: right -50px;
+    display: block;
+    height: 29px;
+    margin-top: 10px;
+    width: 111px;
+}

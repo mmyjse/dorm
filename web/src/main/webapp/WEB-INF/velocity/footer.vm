@@ -1,0 +1,11 @@
+		</div><!--右边内容-->
+		        <span class="showleft" id="showleftid"></span>
+        <div class="hideleft_div" id="lefthidediv">>>功能菜单</div> 
+	</div><!--主要内容-->
+	<div class="main_bottom">
+		<p>Copyright@杭州九问数字科技有限公司版权所有<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1000104207'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/z_stat.php%3Fid%3D1000104207%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script></p>
+	</div>
+</div>
+<!--全屏-->
+</body>
+</html>

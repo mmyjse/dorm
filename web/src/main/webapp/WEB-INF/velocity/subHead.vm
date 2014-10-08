@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>出错啦</title>
+<link rel="shortcut icon" href="/${resourceRoot}/img/favicon.ico">
+<link rel="Bookmark" href="/${resourceRoot}/img/favicon.ico">
+<link href="/${resourceRoot}/css/common/common_back.css" rel="stylesheet" type="text/css">
+<link href="/${resourceRoot}/css/style_back.css" rel="stylesheet" type="text/css">
+<link href="/${resourceRoot}/css/common/common1.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="/${resourceRoot}/img/favicon.ico">
+<link rel="Bookmark" href="/${resourceRoot}/img/favicon.ico">
+<script src="/${resourceRoot}/js/libs/jquery/1.9/jquery.min.js" type="text/javascript"></script>
+<script src="/${resourceRoot}/js/common/common.js" type="text/javascript"></script>
+<script type="text/javascript" src="/${resourceRoot}/js/example/right_xg.js"></script>
+<script src="/${resourceRoot}/js/libs/kindeditor/kindeditor-min.js" type="text/javascript"></script>
+<script src="/${resourceRoot}/js/libs/kindeditor/zh_CN.js" type="text/javascript"></script>
+<style type="text/css">
+    ol li{ list-style:inside;list-style-type: decimal;}
+</style>
+</head>
+
+<body>
+<div class="main newmain"><div class="main_main"> <div class="main_right">

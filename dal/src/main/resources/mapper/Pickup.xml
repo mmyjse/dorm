@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.diqitian.ed.dal.PickupDao">
+
+	<insert id="create" parameterType="Pickup" useGeneratedKeys="true" keyProperty="id">
+		insert into pickup(
+				party_num,contracts,mobile,telephone,province,city,
+				county,town,address,courier_network_id,remark,status,
+				source,control_network_id,control_user_id,courier_user_id,
+				control_remark,assign_date,cancel_remark,custom_user_id,
+				create_date,update_date
+			) values (
+				#{partyNum},#{contracts},#{mobile},#{telephone},#{province},#{city},
+				#{county},#{town},#{address},#{courierNetwork.id},#{remark},#{status},
+				#{source},#{controlNetwork.id},#{controller.id},#{courier.id},
+				#{controlRemark},#{assignDate},#{cancelRemark},#{customer.id},
+				now(),now()
+			)
+	</insert>
+	
+	<update id="update" parameterType="Pickup">
+		update pickup
+		<set>
+			<if test="partyNum != null">party_num = #{partyNum},</if>
+			<if test="contracts != null">contracts = #{contracts},</if>
+			<if test="mobile != null">mobile = #{mobile},</if>
+			<if test="telephone != null">telephone = #{telephone},</if>
+			<if test="province != null">province = #{province},</if>
+			<if test="city != null">city = #{city},</if>
+			<if test="county != null">county = #{county},</if>
+			<if test="town != null">town = #{town},</if>
+			<if test="address != null">address = #{address},</if>
+			<if test="courierNetwork != null and courierNetwork.id != null">courier_network_id = #{courierNetwork.id},</if>
+			<if test="remark != null">remark = #{remark},</if>
+			<if test="status != null">status = #{status},</if>
+			<if test="source != null">source = #{source},</if>
+			<if test="controlNetwork != null and controlNetwork.id != null">control_network_id = #{controlNetwork.id},</if>
+			<if test="controller != null and controller.id != null">control_user_id = #{controller.id},</if>
+			<if test="courier != null and courier.id != null">courier_user_id = #{courier.id},</if>
+			<if test="controlRemark != null">control_remark = #{controlRemark},</if>
+			<if test="assignDate != null">assign_date = #{assignDate},</if>
+			<if test="cancelRemark != null">cancel_remark = #{cancelRemark},</if>
+			<if test="customer != null and customer.id != null">custom_user_id = #{customer.id},</if>
+			update_date = now()
+		</set>
+		where id=#{id}
+	</update>
+	
+	<delete id="delete" parameterType="long">
+		delete from pickup WHERE id=#{id}
+	</delete>
+	
+	<sql id="columns">
+		p.id,p.party_num,p.contracts,p.mobile,p.telephone,p.province,p.city,
+		p.county,p.town,p.address,p.courier_network_id,p.remark,p.status,
+		p.source,p.control_network_id,p.control_user_id,p.courier_user_id,
+		p.control_remark,p.assign_date,p.cancel_remark,p.custom_user_id,
+		p.create_date,p.update_date
+	</sql>
+	<resultMap type="Pickup" id="resultMap">
+		<id property="id" column="id"/>          
+		<result property="partyNum" column="party_num"/>
+		<result property="contracts" column="contracts"/>
+		<result property="mobile" column="mobile"/>
+		<result property="telephone" column="telephone"/>
+		<result property="province" column="province"/>
+		<result property="city" column="city"/>
+		<result property="county" column="county"/>
+		<result property="town" column="town"/>
+		<result property="address" column="address"/>
+		<result property="remark" column="remark"/>
+		<result property="status" column="status"/>
+		<result property="source" column="source"/>
+		<result property="controlRemark" column="control_remark"/>
+		<result property="assignDate" column="assign_date"/>
+		<result property="cancelRemark" column="cancel_remark"/>
+		<result property="createDate" column="create_date"/>
+		<result property="updateDate" column="update_date"/>
+		<association property="courierNetwork" javaType="Network" >  
+			<id property="id" column="courier_network_id" />
+			<result property="name" column="courierNetworkName"/>
+		</association>
+		<association property="controlNetwork" javaType="Network" >  
+			<id property="id" column="control_network_id" />
+		</association>
+		<association property="controller" javaType="User" >  
+			<id property="id" column="control_user_id" />
+		</association>
+		<association property="courier" javaType="User" >  
+			<id property="id" column="courier_user_id" />
+		</association>
+		<association property="customer" javaType="User" >  
+			<id property="id" column="custom_user_id" />
+		</association>
+	</resultMap>
+	
+	<select id="get" resultMap="resultMap" parameterType="long">
+		SELECT <include refid="columns" />
+		FROM pickup p WHERE p.id = #{id}
+	</select>
+	
+	<select id="findByCondition" parameterType="map" resultMap="resultMap">
+		select <include refid="columns" />, n.name as courierNetworkName
+		from pickup p
+		left join network n on n.id = p.courier_network_id
+		where 1=1
+		<if test="param!=null and param.partyNum!=null">and p.party_num like CONCAT('%',#{param.partyNum},'%')</if>
+		<if test="param!=null and param.contracts!=null">and p.contracts like CONCAT('%',#{param.contracts},'%')</if>
+		<if test="param!=null and param.telephone!=null">and p.telephone like CONCAT('%',#{param.telephone},'%')</if>
+		<if test="param!=null and param.status!=null">and p.status like CONCAT('%',#{param.status},'%')</if>
+		<if test="param!=null and param.address!=null">and p.address like CONCAT('%',#{param.address},'%')</if>
+		<if test="param!=null and param.courierNetworkId!=null">and p.courierNetworkId=#{param.courierNetworkId}</if>
+		<if test="param!=null and param.areaKey!=null">
+				and (
+					p.province like CONCAT('%',#{param.province},'%') or
+					p.city like CONCAT('%',#{param.city},'%') or
+					p.county like CONCAT('%',#{param.county},'%') or
+					p.address like CONCAT('%',#{param.address},'%')
+				)
+		</if>
+		    order by p.update_date desc
+		    limit #{pageIndex}, #{pageSize}
+	</select>
+	<select id="countByCondition" parameterType="map" resultType="int">
+		select count(*) from pickup p
+		where 1=1
+		<if test="param!=null and param.partyNum!=null">and p.party_num like CONCAT('%',#{param.partyNum},'%')</if>
+		<if test="param!=null and param.contracts!=null">and p.contracts like CONCAT('%',#{param.contracts},'%')</if>
+		<if test="param!=null and param.telephone!=null">and p.telephone like CONCAT('%',#{param.telephone},'%')</if>
+		<if test="param!=null and param.status!=null">and p.status like CONCAT('%',#{param.status},'%')</if>
+		<if test="param!=null and param.address!=null">and p.address like CONCAT('%',#{param.address},'%')</if>
+		<if test="param!=null and param.courierNetworkId!=null">and p.courierNetworkId=#{param.courierNetworkId}</if>
+		<if test="param!=null and param.areaKey!=null">
+				and (
+					p.province like CONCAT('%',#{param.province},'%') or
+					p.city like CONCAT('%',#{param.city},'%') or
+					p.county like CONCAT('%',#{param.county},'%') or
+					p.address like CONCAT('%',#{param.address},'%')
+				)
+		</if>
+	</select>
+	
+	<select id="findByPartyNum" parameterType="string" resultMap="resultMap">
+		select <include refid="columns" />, n.name as courierNetworkName
+		from pickup p
+		left join network n on n.id = p.courier_network_id
+		where 
+			p.party_num = #{partyNum}
+		order by p.update_date desc
+		limit #{pageIndex}, #{pageSize}
+	</select>
+	<select id="countByPartyNum" parameterType="string" resultType="int">
+		select count(*) from pickup p
+		where 
+			p.party_num = #{partyNum}
+	</select>
+	
+</mapper>

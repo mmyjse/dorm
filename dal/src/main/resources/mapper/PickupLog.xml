@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.diqitian.ed.dal.PickupLogDao">
+
+	<insert id="create" parameterType="PickupLog" useGeneratedKeys="true" keyProperty="id">
+		insert into pickup_log(
+				pickup_id,trace_log,trace_date
+			) values (
+				#{pickupId},#{traceLog},now()
+			)
+	</insert>
+	
+	<delete id="delete" parameterType="long">
+		delete from pickup_log WHERE id=#{id}
+	</delete>
+	
+	<sql id="columns">
+		pl.id,pl.pickup_id,pl.trace_log,pl.trace_date
+	</sql>
+	<resultMap type="PickupLog" id="resultMap">
+		<id property="id" column="id"/>          
+		<result property="pickupId" column="pickup_id"/>
+		<result property="traceLog" column="trace_log"/>
+		<result property="traceDate" column="trace_date"/>
+	</resultMap>
+	
+	<select id="get" resultMap="resultMap" parameterType="long">
+		SELECT <include refid="columns" />
+		FROM pickup_log pl WHERE pl.id = #{id}
+	</select>
+	
+<!-- 	<select id="findByCondition" parameterType="map" resultMap="resultMap"> -->
+<!-- 		select <include refid="columns" /> -->
+<!-- 		from pickup_log pl -->
+<!-- 		where  -->
+<!-- 			pl.pickup_id = #{pickupId} -->
+<!-- 		    order by pl.trace_date desc -->
+<!-- 	</select> -->
+	
+	<select id="getPickupLogsByPickupId" parameterType="long" resultMap="resultMap">
+		select <include refid="columns" />
+		from pickup_log pl
+		where 
+			pl.pickup_id = #{pickupId}
+		    order by pl.trace_date desc
+	</select>
+	
+</mapper>

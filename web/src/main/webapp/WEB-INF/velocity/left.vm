@@ -1,0 +1,26 @@
+    	<div class="mian_left">
+           <h2>功能菜单</h2>
+           <div class="main_list">            
+              <ul id="main_listid">
+				#foreach($function in $functions)
+					<li class="twocolbd">
+            		<h3><span class="list_fltxt">$!{function.name}</span><a href="javascript:void(0)" class="ashow1"></a></h3>
+                    <ul>
+						#foreach($child in $!{function.sub})
+                    	<li >
+							<a id="jdxxwh" href="$!{child.url}" target="iframe_right">
+								<span class="list_flimg "></span>
+								<span class="list_fltxt">$!{child.name}</span>
+							</a>
+						</li>
+						#end
+					</ul>
+                </li>
+				#end
+            	
+              </ul>       
+            </div>
+          <script type="text/javascript">	$('#main_listid').find('li ul li a').loadit();</script>
+        </div><!--左边公共-->
+        <div class="main_right" id="main_right">
+            <iframe name="iframe_right" width="100%" height="100%" frameborder="0" scrolling="no" src="/welcome"></iframe>

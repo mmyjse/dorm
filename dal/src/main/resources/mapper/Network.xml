@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.diqitian.ed.dal.NetworkDao">
+
+	<insert id="create" parameterType="Network" useGeneratedKeys="true" keyProperty="id">
+		insert into network(
+				name,express_area_id,
+				province,city,county,town,address,
+				remark,enable,create_date
+			) values (
+				#{name},#{expressArea.id},
+				#{province},#{city},#{county},#{town},#{address},
+				#{remark},#{enable},now()
+			)
+	</insert>
+	
+	<delete id="delete" parameterType="long">
+		delete from network WHERE id=#{id}
+	</delete>
+	
+	<sql id="columns">
+		n.id,n.name,n.express_area_id,
+		n.province,n.city,n.county,n.town,n.address,
+		n.remark,n.enable,n.create_date
+	</sql>
+	<resultMap type="Network" id="resultMap">
+	 	<id property="id" column="id"/>          
+        <result property="name" column="name"/>
+        <result property="province" column="province"/>
+        <result property="city" column="city"/>
+        <result property="county" column="county"/>
+        <result property="town" column="town"/>
+        <result property="address" column="address"/>
+        <result property="remark" column="remark"/>
+        <result property="enable" column="enable"/>
+        <result property="createDate" column="create_date"/>
+        <association property="expressArea" javaType="ExpressArea" >  
+			<id property="id" column="express_area_id" />
+   	    </association>
+	</resultMap>
+	
+	<select id="get" resultMap="resultMap" parameterType="long">
+		SELECT <include refid="columns" />
+		FROM network n WHERE n.id = #{id}
+	</select>
+	
+	<select id="getNetworksByExpressAreaId" resultMap="resultMap" parameterType="long">
+		SELECT <include refid="columns" />
+		FROM network n WHERE n.express_area_id = #{expressAreaId} and n.enable=1
+	</select>
+	
+</mapper>

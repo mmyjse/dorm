@@ -1,0 +1,98 @@
+#macro (pagination $currentPage, $totalPages, $totalRecord, $formId)
+	#if($totalRecord && $totalRecord> 0)
+	<div class="pagination pagination-large pagination-centered">
+	  <ul>
+		<li id="firPage" #if($currentPage == 1) class="disabled" #end><a href="#">首页</a></li>
+		<li id="prePage" #if($currentPage == 1) class="disabled" #end><a href="#">上一页</a></li>
+	    <li class="disabled"><a href="#">共$totalRecord条记录</a></li>
+	    <li class="disabled"><a href="#">当前$currentPage/$totalPages页</a></li>
+	    <li id="nextPage" #if($currentPage == $totalPages) class="disabled" #end><a href="#" >下一页</a></li>
+		<li  id="lastPage" #if($currentPage == $totalPages) class="disabled" #end><a href="#">尾页</a></li>	 
+ </ul>
+	</div>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var currentPage = parseInt($currentPage);
+			var totalPages = parseInt($totalPages);
+			$('#firPage').click(function(){
+			if(currentPage == 1){
+					return false;
+				}
+				$('#pageIndex').val(1);
+				$('#$formId').submit();
+			});	
+			$('#prePage').click(function(){
+				if(currentPage <= 1){
+					return false;
+				}
+				$('#pageIndex').val(currentPage-1);
+				$('#$formId').submit();
+				return false;
+			});	
+			$('#nextPage').click(function(){
+				if(currentPage >= totalPages){
+					return false;
+				}
+				$('#pageIndex').val(currentPage+1);
+				$('#$formId').submit();
+				return false;
+			});
+			$('#lastPage').click(function(){
+				if(currentPage == totalPages){
+					return false;
+				}
+				$('#pageIndex').val(totalPages);
+				$('#$formId').submit();
+			});	
+			$('#go').click(function(){
+				if($('#goPage').val()==''){
+					return false;
+				}
+				var gotoPage = parseInt($('#goPage').val());
+				if(gotoPage > totalPages){
+					gotoPage = totalPages;
+				}
+				$('#pageIndex').val(gotoPage);
+				$('#$formId').submit();
+				return false;
+			});
+		});
+	</script>
+	#end
+#end
+#macro (cutTooLong $content, $maxLength)
+	#if($content)
+		#if($content.length() <= $maxLength)
+			$content
+		#else
+			${content.substring(0,$maxLength)}...
+		#end
+	#end
+#end
+
+#macro(pickupStatusType $pickupStatus)
+	#if($pickupStatus=="wait")
+		等待分配
+	#elseif($pickupStatus=="cancel")
+		已取消
+	#elseif($pickupStatus=="assign")
+		已分配
+	#elseif($pickupStatus=="end")
+		已结束
+	#end
+#end
+
+#macro(waybillStatusType $waybillStatus)
+	#if($waybillStatus=="add")
+		已入库
+	#elseif($waybillStatus=="rollout")
+		网点转出
+	#elseif($waybillStatus=="rollin")
+		网点转入
+	#elseif($waybillStatus=="signed")
+		已签收
+	#elseif($waybillStatus=="end")
+		已结束
+	#end
+#end
+

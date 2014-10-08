@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.diqitian.ed.dal.WaybillLogDao">
+
+	<insert id="create" parameterType="WaybillLog" useGeneratedKeys="true" keyProperty="id">
+		insert into waybill_log(
+				bill_number,trace_log,trace_date
+			) values (
+				#{billNumber},#{traceLog},now()
+			)
+	</insert>
+	
+	<delete id="delete" parameterType="long">
+		delete from waybill_log WHERE id=#{id}
+	</delete>
+	
+	<sql id="columns">
+		wl.id,wl.bill_number,wl.trace_log,wl.trace_date
+	</sql>
+	<resultMap type="WaybillLog" id="resultMap">
+		<id property="id" column="id"/>          
+		<result property="billNumber" column="bill_number"/>
+		<result property="traceLog" column="trace_log"/>
+		<result property="traceDate" column="trace_date"/>
+	</resultMap>
+	
+	<select id="get" resultMap="resultMap" parameterType="long">
+		SELECT <include refid="columns" />
+		FROM waybill_log wl WHERE wl.id = #{id}
+	</select>
+	
+<!-- 	<select id="findByCondition" parameterType="map" resultMap="resultMap"> -->
+<!-- 		select <include refid="columns" /> -->
+<!-- 		from waybill_log wl -->
+<!-- 		where  -->
+<!-- 			wl.bill_number = #{billNumber} -->
+<!-- 		    order by wl.trace_date desc -->
+<!-- 	</select> -->
+	
+	<select id="getWaybillLogsByBillNumber" parameterType="string" resultMap="resultMap">
+		select <include refid="columns" />
+		from waybill_log wl
+		where 
+			wl.bill_number = #{billNumber}
+		    order by wl.trace_date desc
+	</select>
+</mapper>

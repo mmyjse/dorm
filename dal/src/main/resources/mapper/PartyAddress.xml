@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.diqitian.ed.dal.PartyAddressDao">
+
+	<insert id="create" parameterType="PartyAddress" useGeneratedKeys="true" keyProperty="id">
+		insert into party_address(
+				party_id,contracts,mobile,telephone,
+				province,city,county,town,address,
+				network_id,courier_user_id,create_date
+			) values (
+				#{party.id},#{contracts},#{mobile},#{telephone},
+				#{province},#{city},#{county},#{town},#{address},
+				#{network.id},#{courier.id},now()
+			)
+	</insert>
+	
+	<delete id="delete" parameterType="long">
+		delete from party_address WHERE id=#{id}
+	</delete>
+	
+	<sql id="columns">
+		pd.id,pd.party_id,pd.contracts,pd.mobile,pd.telephone,
+		pd.province,pd.city,pd.county,pd.town,pd.address,
+		pd.network_id,pd.courier_user_id,pd.create_date
+	</sql>
+	<resultMap type="PartyAddress" id="resultMap">
+	 	<id property="id" column="id"/>          
+        <result property="contracts" column="contracts"/>
+        <result property="mobile" column="mobile"/>
+        <result property="telephone" column="telephone"/>
+        <result property="province" column="province"/>
+        <result property="city" column="city"/>
+        <result property="county" column="county"/>
+        <result property="town" column="town"/>
+        <result property="address" column="address"/>
+        <result property="createDate" column="create_date"/>
+        <association property="party" javaType="Party" >  
+			<id property="id" column="party_id" />
+   	    </association>
+        <association property="network" javaType="Network" >  
+			<id property="id" column="network_id" />
+   	    </association>
+   	    <association property="courier" javaType="User" >  
+			<id property="id" column="courier_user_id" />
+   	    </association>
+	</resultMap>
+	
+	<select id="get" resultMap="resultMap" parameterType="long">
+		SELECT <include refid="columns" />
+		FROM party p WHERE p.id = #{id}
+	</select>
+	
+	<select id="getPartyAddressesByPartyId" resultMap="resultMap" parameterType="long">
+		SELECT <include refid="columns" />
+		FROM party_address pd WHERE pd.party_id = #{partyId}
+	</select>
+	
+</mapper>

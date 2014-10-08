@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.diqitian.ed.dal.WaybillDao">
+
+	<insert id="create" parameterType="Waybill" useGeneratedKeys="true" keyProperty="id">
+		insert into waybill(
+				bill_number,weight,volume,courier_user_id,courier_network_id,
+				deliverer_user_id,from_province,from_city,from_county,from_town,
+				from_address,to_province,to_city,to_county,to_town,to_address,to_contracts,to_phone,
+				from_party_num,from_party_name,topay,collection,collection_amount,
+				insured,insured_amount,received_amount,courier_photo,signed_photo,
+				delivery_amount,delivery_pay_type,remark,status,create_date,update_date
+			) values (
+				#{billNumber},#{weight},#{volume},#{courier.id},#{courierNetwork.id},
+				#{deliverer.id},#{fromProvince},#{fromCity},#{fromCounty},#{fromTown},
+				#{fromAddress},#{toProvince},#{toCity},#{toCounty},#{toTown},#{toAddress},#{toContracts},#{toPhone},
+				#{fromPartyNum},#{fromPartyName},#{topay},#{collection},#{collectionAmount},
+				#{insured},#{insuredAmount},#{receivedAmount},#{courierPhoto},#{signedPhoto},
+				#{deliveryAmount},#{deliveryPayType},#{remark},#{status},now(),now()
+			)
+	</insert>
+	
+	<update id="update" parameterType="Waybill">
+		update waybill
+		<set>
+			<if test="billNumber != null">bill_number = #{billNumber},</if>
+			<if test="weight != null">weight = #{weight},</if>
+			<if test="volume != null">volume = #{volume},</if>
+			<if test="courier != null and courier.id != null">courier_user_id = #{courier.id},</if>
+			<if test="courierNetwork != null and courierNetwork.id != null">courier_network_id = #{courierNetwork.id},</if>
+			<if test="deliverer != null and deliverer.id != null">deliverer_user_id = #{deliverer.id},</if>
+			<if test="fromProvince != null">from_province = #{fromProvince},</if>
+			<if test="fromCity != null">from_city = #{fromCity},</if>
+			<if test="fromCounty != null">from_county = #{fromCounty},</if>
+			<if test="fromTown != null">from_town = #{fromTown},</if>
+			<if test="fromAddress != null">from_address = #{fromAddress},</if>
+			<if test="toProvince != null">to_province = #{toProvince},</if>
+			<if test="toCity != null">to_city = #{toCity},</if>
+			<if test="toCounty != null">to_county = #{toCounty},</if>
+			<if test="toTown != null">to_town = #{toTown},</if>
+			<if test="toAddress != null">to_address = #{toAddress},</if>
+			<if test="toContracts != null">to_contracts = #{toContracts},</if>
+			<if test="toPhone != null">to_phone = #{toPhone},</if>
+			<if test="fromPartyNum != null">from_party_num = #{fromPartyNum},</if>
+			<if test="fromPartyName != null">from_party_name = #{fromPartyName},</if>
+			<if test="topay != null">topay = #{topay},</if>
+			<if test="collection != null">collection = #{collection},</if>
+			<if test="collectionAmount != null">collection_amount = #{collectionAmount},</if>
+			<if test="insured != null">insured = #{insured},</if>
+			<if test="insuredAmount != null">insured_amount = #{insuredAmount},</if>
+			<if test="receivedAmount != null">received_amount = #{receivedAmount},</if>
+			<if test="courierPhoto != null">courier_photo = #{courierPhoto},</if>
+			<if test="signedPhoto != null">signed_photo = #{signedPhoto},</if>
+			<if test="deliveryAmount != null">delivery_amount = #{deliveryAmount},</if>
+			<if test="deliveryPayType != null">delivery_pay_type = #{deliveryPayType},</if>
+			<if test="status != null">status = #{status},</if>
+			<if test="expressArea != null and expressArea.id !=null">express_area_id = #{expressArea.id},</if>
+			update_date = now()
+		</set>
+		where 1=1
+		<if test="id!=null">and id=#{id}</if> 
+		<if test="billNumber!=null">and bill_number = #{billNumber}</if>
+	</update>
+	
+	<delete id="delete" parameterType="long">
+		delete from waybill WHERE id=#{id}
+	</delete>
+	
+	<sql id="columns">
+		w.id,w.bill_number,w.weight,w.volume,w.courier_user_id,w.courier_network_id,
+		w.deliverer_user_id,w.from_province,w.from_city,w.from_county,w.from_town,
+		w.from_address,w.to_province,w.to_city,w.to_county,w.to_town,w.to_address,w.to_contracts,w.to_phone,
+		w.from_party_num,w.from_party_name,w.topay,w.collection,w.collection_amount,
+		w.insured,w.insured_amount,w.received_amount,w.courier_photo,w.signed_photo,
+		w.delivery_amount,w.delivery_pay_type,w.remark,w.express_area_id,w.status,
+		w.create_date,w.update_date,w.out_date
+	</sql>
+	<resultMap type="Waybill" id="resultMap">
+		<id property="id" column="id"/>          
+		<result property="billNumber" column="bill_number"/>
+		<result property="weight" column="weight"/>
+		<result property="volume" column="volume"/>
+		<result property="fromProvince" column="from_province"/>
+		<result property="fromCity" column="from_city"/>
+		<result property="fromCounty" column="from_county"/>
+		<result property="fromTown" column="from_town"/>
+		<result property="fromAddress" column="from_address"/>
+		<result property="toProvince" column="to_province"/>
+		<result property="toCity" column="to_city"/>
+		<result property="toCounty" column="to_county"/>
+		<result property="toTown" column="to_town"/>
+		<result property="toAddress" column="to_address"/>
+		<result property="toContracts" column="to_contracts"/>
+		<result property="toPhone" column="to_phone"/>
+		<result property="fromPartyNum" column="from_party_num"/>
+		<result property="fromPartyName" column="from_party_name"/>
+		<result property="topay" column="topay"/>
+		<result property="collection" column="collection"/>
+		<result property="collectionAmount" column="collection_amount"/>
+		<result property="insured" column="insured"/>
+		<result property="insuredAmount" column="insured_amount"/>
+		<result property="receivedAmount" column="received_amount"/>
+		<result property="courierPhoto" column="courier_photo"/>
+		<result property="signedPhoto" column="signed_photo"/>
+		<result property="deliveryAmount" column="delivery_amount"/>
+		<result property="deliveryPayType" column="delivery_pay_type"/>
+		<result property="remark" column="remark"/>
+		<result property="status" column="status"/>
+		<result property="createDate" column="create_date"/>
+		<result property="updateDate" column="update_date"/>
+		<result property="outDate" column="out_date"/>
+		<association property="courier" javaType="User" >  
+			<id property="id" column="courier_user_id" />
+			<result property="userName" column="courierUserName"/>
+			<result property="workNumber" column="courierWorkNumber"/>
+		</association>
+		<association property="courierNetwork" javaType="Network" >  
+			<id property="id" column="courier_network_id" />
+			<result property="name" column="courierNetworkName"/>
+		</association>
+		<association property="deliverer" javaType="User" >  
+			<id property="id" column="deliverer_user_id" />
+			<result property="userName" column="delivererUserName"/>
+			<result property="workNumber" column="delivererWorkNumber"/>
+		</association>
+		<association property="expressArea" javaType="ExpressArea" >  
+			<id property="id" column="express_area_id" />
+			<result property="areaCode" column="expressAreaCode"/>
+			<result property="areaName" column="expressAreaName"/>
+		</association>
+	</resultMap>
+	
+	<select id="get" resultMap="resultMap" parameterType="long">
+		SELECT <include refid="columns" />
+		FROM waybill w WHERE w.id = #{id}
+	</select>
+	
+	<select id="findByCondition" parameterType="map" resultMap="resultMap">
+		select <include refid="columns" />, 
+			u.work_number as courierWorkNumber,
+			up.name as courierUserName,
+			n.name as courierNetworkName
+		from waybill w
+		left join user u on w.courier_user_id = u.id
+		left join user_profile up on u.id = up.user_id
+		left join network n on n.id = w.courier_network_id
+		left join express_area ea on w.express_area_id = ea.id
+		where 1=1
+		<if test="param!=null and param.billNumber!=null"> and w.bill_number like CONCAT('%',#{param.billNumber},'%')</if>
+ 		<if test="param!=null and param.status!=null"> and w.status=#{param.status}</if>
+ 		<if test="param!=null and param.toAddress!=null and param.toAddress!=''"> and w.to_address like CONCAT('%',#{param.toAddress},'%')</if>
+<!-- 		<if test="param!=null and param.areaKey!=null"> -->
+<!-- 				and ( -->
+<!-- 					p.province like CONCAT('%',#{param.province},'%') or -->
+<!-- 					p.city like CONCAT('%',#{param.city},'%') or -->
+<!-- 					p.county like CONCAT('%',#{param.county},'%') or -->
+<!-- 					p.address like CONCAT('%',#{param.address},'%') -->
+<!-- 				) -->
+<!-- 		</if> -->
+		    order by w.create_date desc
+		    limit #{pageIndex}, #{pageSize}
+	</select>
+	<select id="countByCondition" parameterType="map" resultType="int">
+		select count(*) from waybill w
+		where 1=1
+		<if test="param!=null and param.billNumber!=null">and w.bill_number like CONCAT('%',#{param.billNumber},'%')</if>
+ 		<if test="param!=null and param.status!=null">and w.status like CONCAT('%',#{param.status},'%')</if>
+<!-- 		<if test="param!=null and param.areaKey!=null"> -->
+<!-- 				and ( -->
+<!-- 					p.province like CONCAT('%',#{param.province},'%') or -->
+<!-- 					p.city like CONCAT('%',#{param.city},'%') or -->
+<!-- 					p.county like CONCAT('%',#{param.county},'%') or -->
+<!-- 					p.address like CONCAT('%',#{param.address},'%') -->
+<!-- 				) -->
+<!-- 		</if> -->
+	</select>
+	
+	<select id="getByBillNumber" resultMap="resultMap" parameterType="String">
+		SELECT <include refid="columns" />
+		FROM waybill w WHERE w.bill_number = #{billNumber}
+	</select>
+	
+	<select id="findRollout" parameterType="map" resultMap="resultMap">
+		select <include refid="columns" />, 
+			u.work_number as delivererWorkNumber,
+			up.name as delivererUserName,
+			n.name as delivererNetworkName
+		from waybill w
+		left join user u on w.deliverer_user_id = u.id
+		left join user_profile up on u.id = up.user_id
+		left join network n on n.id = w.courier_network_id
+		left join express_area ea on w.express_area_id = ea.id
+		where 1=1
+		<if test="param!=null and param.billNumber!=null"> and w.bill_number like CONCAT('%',#{param.billNumber},'%')</if>
+ 		<if test="param!=null and param.status!=null"> and w.status=#{param.status}</if>
+ 		<if test="param!=null and param.userName!=null"> and up.name like CONCAT('%',#{param.userName},'%')</if>
+		    order by w.create_date desc
+		    limit #{pageIndex}, #{pageSize}
+	</select>
+	
+	<select id="findByPartyNum" parameterType="map" resultMap="resultMap">
+		select <include refid="columns" />, 
+			u.work_number as courierWorkNumber,
+			up.name as courierUserName,
+			n.name as courierNetworkName
+		from waybill w
+		left join user u on w.courier_user_id = u.id
+		left join user_profile up on u.id = up.user_id
+		left join network n on n.id = w.courier_network_id
+		left join express_area ea on w.express_area_id = ea.id
+		where 
+			w.from_party_num = #{partyNum}
+		order by w.create_date desc
+		limit #{pageIndex}, #{pageSize}
+	</select>
+	<select id="countByPartyNum" parameterType="map" resultType="int">
+		select count(*) from waybill w
+		where 
+			w.from_party_num = #{partyNum}
+	</select>
+	
+</mapper>
